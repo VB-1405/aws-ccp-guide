@@ -11,7 +11,7 @@
 
 ## 🌐 Live Guide
 
-**[https://github.com/VB-1405/aws-ccp-guide](https://github.com/VB-1405/aws-ccp-guide)**
+**[https://vb-1405.github.io/aws-ccp-guide/](https://vb-1405.github.io/aws-ccp-guide/)**
 
 Single HTML file — works in any browser, no internet required after loading.
 
