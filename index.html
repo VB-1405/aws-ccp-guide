@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cert Guides by Vrishabh Bhavsar — Free Certification Study Guides</title>
+<meta name="description" content="Free, open-source certification study guides built while passing each exam. AWS CCP, Security+, CCNA and more. No login. No paywall. Ever.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #04060f;
+  --surface: #080c18;
+  --card: #0c1022;
+  --border: #131c30;
+  --border2: #1a2840;
+  --text: #c0d0e8;
+  --muted: #4a6080;
+  --dim: #243348;
+  --white: #eef4ff;
+  --cyan: #38bdf8;
+  --green: #34d399;
+  --gold: #fbbf24;
+  --red: #e63946;
+  --orange: #f77f00;
+  --purple: #a78bfa;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lora', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.75;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+a { color: var(--cyan); text-decoration: none; }
+
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(56,189,248,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(4,6,15,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  z-index: 100;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--white);
+  letter-spacing: -.3px;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all .15s;
+  text-decoration: none;
+}
+.nav-link:hover { color: var(--white); background: rgba(255,255,255,.05); }
+.nav-btn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: var(--cyan);
+  color: #000;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  text-decoration: none;
+}
+.nav-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 140px 48px 80px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero-glow {
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(56,189,248,.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(56,189,248,.06);
+  border: 1px solid rgba(56,189,248,.15);
+  color: var(--cyan);
+  padding: 5px 16px;
+  border-radius: 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-tag::before { content: '●'; font-size: 7px; animation: blink 1.5s ease infinite; }
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 6vw, 80px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -2.5px;
+  margin-bottom: 20px;
+}
+.hero h1 .accent { color: var(--cyan); }
+.hero h1 .accent-r { color: var(--red); }
+.hero-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+.hero-chips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.hstat { text-align: center; }
+.hstat-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.hstat-l {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+/* ── SECTION ── */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+}
+.section-sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 48px;
+}
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 0 48px;
+}
+
+/* ── CERT CARDS ── */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.cert-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transition: all .25s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+.cert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.cert-card.live:hover { border-color: rgba(52,211,153,.2); }
+.cert-card.coming { opacity: .55; cursor: default; pointer-events: none; }
+.cert-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.cert-icon { font-size: 36px; line-height: 1; }
+.cert-badge {
+  padding: 3px 11px;
+  border-radius: 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+.cert-org {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.cert-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+.cert-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.cert-desc {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  flex: 1;
+}
+.cert-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 22px;
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+}
+.cert-meta strong { font-size: 15px; font-weight: 800; color: var(--white); }
+.cert-actions { display: flex; gap: 8px; }
+.btn-primary {
+  flex: 1;
+  padding: 11px;
+  border-radius: 9px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+.btn-secondary {
+  flex: 1;
+  padding: 11px;
+  border-radius: 9px;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,.15); }
+
+/* ── ABOUT SECTION ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.about-text p {
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.about-text p strong { color: var(--white); font-weight: 600; }
+.about-aside {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+}
+.aside-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.aside-item:last-child { border-bottom: none; }
+.aside-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.aside-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+.aside-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── ROADMAP ── */
+.roadmap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.roadmap::before {
+  content: '';
+  position: absolute;
+  left: 20px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--cyan), var(--border), transparent);
+}
+.rm-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0;
+  position: relative;
+}
+.rm-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  z-index: 1;
+  border: 2px solid;
+}
+.rm-content { flex: 1; padding-top: 6px; }
+.rm-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.rm-sub { font-size: 12px; color: var(--muted); }
+.rm-tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 4px;
+  font-family: 'Syne', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  border: 1px solid;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-left {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+.footer-left strong { color: var(--white); }
+.footer-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: all .15s;
+}
+.footer-link:hover { color: var(--cyan); border-color: rgba(56,189,248,.2); }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero { padding: 100px 20px 60px; }
+  section { padding: 60px 20px; }
+  .guides-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  footer { padding: 32px 20px; flex-direction: column; }
+  .divider { margin: 0 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    Cert Guides
+  </div>
+  <div class="nav-links">
+    <a href="#guides" class="nav-link">Guides</a>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#roadmap" class="nav-link">Roadmap</a>
+    <a href="https://vb-1405.github.io/Portfolio_VB/" target="_blank" class="nav-link">Portfolio</a>
+    <a href="https://www.linkedin.com/in/cyberrookie/" target="_blank" class="nav-btn">LinkedIn ↗</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Free · Open Source · Always Growing</div>
+  <h1>Learn. Pass.<br><span class="accent">Teach.</span></h1>
+  <p class="hero-sub">Free certification study guides built while passing each exam — detailed notes, embedded video resources, and full-length practice exams. No login. No paywall. Ever.</p>
+  <div class="hero-chips">
+    <span class="chip" style="background:rgba(52,211,153,.07);border-color:rgba(52,211,153,.2);color:var(--green)">✓ Built while passing the real exam</span>
+    <span class="chip" style="background:rgba(56,189,248,.07);border-color:rgba(56,189,248,.2);color:var(--cyan)">✓ AI-assisted learning</span>
+    <span class="chip" style="background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.2);color:var(--gold)">✓ Professor Messer videos embedded</span>
+    <span class="chip" style="background:rgba(167,139,250,.07);border-color:rgba(167,139,250,.2);color:var(--purple)">✓ Open source on GitHub</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-n" style="color:var(--cyan)">2</div>
+      <div class="hstat-l">Live Guides</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">357</div>
+      <div class="hstat-l">Practice Questions</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n">9</div>
+      <div class="hstat-l">Exam Domains</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" style="color:var(--green)">Free</div>
+      <div class="hstat-l">Always</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── GUIDES ── -->
+<section id="guides">
+  <div class="section-eyebrow">// Certification Study Guides</div>
+  <h2 class="section-title">Available Guides</h2>
+  <p class="section-sub">Each guide is built from scratch while actively studying for the real exam. Every guide opens as its own standalone page.</p>
+
+  <div class="guides-grid">
+
+    <!-- AWS CCP -->
+    <div class="cert-card live fade-up" style="border-top-color:var(--gold);" onclick="window.open('aws-ccp-guide.html','_blank')" role="link" tabindex="0">
+      <div class="cert-card-top">
+        <div class="cert-icon">☁️</div>
+        <div class="cert-badge" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--green)">● Live</div>
+      </div>
+      <div class="cert-org" style="color:var(--gold)">Amazon Web Services</div>
+      <div class="cert-name">Cloud Practitioner</div>
+      <div class="cert-code">CLF-C02 · Passed May 2026</div>
+      <div class="cert-desc">Complete notes on all 4 exam domains with 18 subtopics, comparison tables, and exam trap callouts. Official AWS documentation linked throughout.</div>
+      <div class="cert-meta">
+        <div><strong>4</strong><br>Domains</div>
+        <div><strong>182</strong><br>Questions</div>
+        <div><strong>3</strong><br>Mock Exams</div>
+        <div><strong>18</strong><br>Subtopics</div>
+      </div>
+      <div class="cert-actions">
+        <a href="aws-ccp-guide.html" target="_blank" class="btn-primary" style="background:var(--gold);color:#000;" onclick="event.stopPropagation()">Study Notes →</a>
+        <a href="aws-ccp-guide.html#exams" target="_blank" class="btn-secondary" onclick="event.stopPropagation()">Practice Exams</a>
+      </div>
+    </div>
+
+    <!-- Security+ -->
+    <div class="cert-card live fade-up" style="border-top-color:var(--red);" onclick="window.open('security-plus-guide.html','_blank')" role="link" tabindex="0">
+      <div class="cert-card-top">
+        <div class="cert-icon">🔒</div>
+        <div class="cert-badge" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--green)">● Live</div>
+      </div>
+      <div class="cert-org" style="color:var(--red)">CompTIA</div>
+      <div class="cert-name">Security+</div>
+      <div class="cert-code">SY0-701 · Passed</div>
+      <div class="cert-desc">Full notes on all 5 domains with Professor Messer video thumbnails embedded per topic. Detailed exam traps, comparison tables, and scenario-based practice questions.</div>
+      <div class="cert-meta">
+        <div><strong>5</strong><br>Domains</div>
+        <div><strong>175</strong><br>Questions</div>
+        <div><strong>3</strong><br>Mock Exams</div>
+        <div><strong>15+</strong><br>Videos</div>
+      </div>
+      <div class="cert-actions">
+        <a href="security-plus-guide.html" target="_blank" class="btn-primary" style="background:var(--red);color:#fff;" onclick="event.stopPropagation()">Study Notes →</a>
+        <a href="security-plus-guide.html#exams" target="_blank" class="btn-secondary" onclick="event.stopPropagation()">Practice Exams</a>
+      </div>
+    </div>
+
+    <!-- CCNA -->
+    <div class="cert-card coming fade-up" style="border-top-color:rgba(56,189,248,.3);">
+      <div class="cert-card-top">
+        <div class="cert-icon">🌐</div>
+        <div class="cert-badge" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:var(--gold)">In Progress</div>
+      </div>
+      <div class="cert-org" style="color:var(--cyan)">Cisco</div>
+      <div class="cert-name">CCNA</div>
+      <div class="cert-code">200-301 · Exam Planned</div>
+      <div class="cert-desc">Networking fundamentals, routing & switching, IP services, security fundamentals, and automation. Full guide drops the day the cert is passed.</div>
+      <div class="cert-meta">
+        <div><strong>6</strong><br>Domains</div>
+        <div><strong>—</strong><br>Questions</div>
+        <div><strong>3</strong><br>Mock Exams</div>
+        <div><strong>—</strong><br>Videos</div>
+      </div>
+      <div class="cert-actions">
+        <div class="btn-primary" style="background:var(--border);color:var(--muted);cursor:default;">Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- AWS SAA -->
+    <div class="cert-card coming fade-up" style="border-top-color:rgba(251,191,36,.3);">
+      <div class="cert-card-top">
+        <div class="cert-icon">🏗️</div>
+        <div class="cert-badge" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:var(--gold)">Planned</div>
+      </div>
+      <div class="cert-org" style="color:var(--gold)">Amazon Web Services</div>
+      <div class="cert-name">Solutions Architect Associate</div>
+      <div class="cert-code">SAA-C03 · Next after CCNA</div>
+      <div class="cert-desc">Deep dive into AWS architecture — high availability, security, scalability, and cost optimization. Associate-level design patterns and best practices.</div>
+      <div class="cert-meta">
+        <div><strong>4</strong><br>Domains</div>
+        <div><strong>—</strong><br>Questions</div>
+        <div><strong>3</strong><br>Mock Exams</div>
+        <div><strong>—</strong><br>Videos</div>
+      </div>
+      <div class="cert-actions">
+        <div class="btn-primary" style="background:var(--border);color:var(--muted);cursor:default;">Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- CySA+ -->
+    <div class="cert-card coming fade-up" style="border-top-color:rgba(167,139,250,.3);">
+      <div class="cert-card-top">
+        <div class="cert-icon">🔍</div>
+        <div class="cert-badge" style="background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:var(--purple)">Planned</div>
+      </div>
+      <div class="cert-org" style="color:var(--purple)">CompTIA</div>
+      <div class="cert-name">CySA+</div>
+      <div class="cert-code">CS0-003 · On the Roadmap</div>
+      <div class="cert-desc">Threat and vulnerability management, security operations, incident response, and reporting. The analyst-level follow-up to Security+.</div>
+      <div class="cert-meta">
+        <div><strong>5</strong><br>Domains</div>
+        <div><strong>—</strong><br>Questions</div>
+        <div><strong>3</strong><br>Mock Exams</div>
+        <div><strong>—</strong><br>Videos</div>
+      </div>
+      <div class="cert-actions">
+        <div class="btn-primary" style="background:var(--border);color:var(--muted);cursor:default;">Coming Soon</div>
+      </div>
+    </div>
+
+    <!-- More Coming -->
+    <div class="cert-card coming fade-up" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:280px;border-style:dashed;border-color:rgba(56,189,248,.1);">
+      <div style="font-size:36px;margin-bottom:14px;">📚</div>
+      <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;">More On the Way</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.65;max-width:220px;">Every cert earned gets a free guide. Follow on LinkedIn for updates when new guides drop.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-eyebrow">// The Story</div>
+  <h2 class="section-title">Why These Guides Exist</h2>
+  <p class="section-sub">Built while studying, published after passing.</p>
+
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>After passing the <strong>AWS Certified Cloud Practitioner</strong> exam in May 2026, I turned my entire prep into a free, structured study guide that anyone can use.</p>
+      <p>I'm a Cybersecurity MS student at <strong>CSUDH</strong> and I believe the best way to truly understand something is to teach it. Every guide here is written from the perspective of someone who just passed the real exam — so the content reflects what actually matters.</p>
+      <p>The <strong>Security+ guide</strong> embeds Professor Messer's free videos directly into each topic — so you have context before reading the notes. No hunting YouTube. No switching tabs.</p>
+      <p>This platform grows with every cert I earn. Watch this space.</p>
+      <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://vb-1405.github.io/Portfolio_VB/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:9px;background:var(--card);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;transition:all .15s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">👤 Portfolio</a>
+        <a href="https://www.linkedin.com/in/cyberrookie/" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:9px;background:var(--card);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;transition:all .15s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">↗ LinkedIn</a>
+        <a href="https://github.com/VB-1405/cert-guides" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:9px;background:var(--card);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;transition:all .15s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">⭐ GitHub</a>
+        <a href="https://www.credly.com/badges/144c27ac-3106-4c8d-a9da-8aa5f3d3064a" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:9px;background:var(--card);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;color:var(--muted);text-decoration:none;transition:all .15s;" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--muted)'">🏅 Verify AWS CCP</a>
+      </div>
+    </div>
+    <div class="about-aside fade-up">
+      <div class="aside-item">
+        <div class="aside-icon" style="background:rgba(251,191,36,.08);">☁️</div>
+        <div>
+          <div class="aside-title">AWS Cloud Practitioner</div>
+          <div class="aside-sub">Passed May 2026 · CLF-C02<br>Verified on Credly</div>
+        </div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-icon" style="background:rgba(230,57,70,.08);">🔒</div>
+        <div>
+          <div class="aside-title">CompTIA Security+</div>
+          <div class="aside-sub">Passed · SY0-701<br>Foundation of this guide series</div>
+        </div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-icon" style="background:rgba(56,189,248,.08);">🎓</div>
+        <div>
+          <div class="aside-title">MS Cybersecurity</div>
+          <div class="aside-sub">California State University, Dominguez Hills<br>Graduating December 2026</div>
+        </div>
+      </div>
+      <div class="aside-item">
+        <div class="aside-icon" style="background:rgba(52,211,153,.08);">🏆</div>
+        <div>
+          <div class="aside-title">TryHackMe</div>
+          <div class="aside-sub">Top 1% globally<br>Hands-on cybersecurity practice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ROADMAP ── -->
+<section id="roadmap">
+  <div class="section-eyebrow">// What's Coming</div>
+  <h2 class="section-title">Certification Roadmap</h2>
+  <p class="section-sub">Each milestone gets its own full guide. Follow along on LinkedIn.</p>
+
+  <div class="roadmap fade-up" style="max-width:600px;">
+    <div class="rm-item">
+      <div class="rm-dot" style="background:rgba(251,191,36,.1);border-color:var(--gold);color:var(--gold)">☁️</div>
+      <div class="rm-content">
+        <div class="rm-title">AWS Cloud Practitioner (CLF-C02)</div>
+        <div class="rm-sub">Passed May 2026 · Guide live</div>
+        <div class="rm-tag" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--green)">✓ Complete</div>
+      </div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-dot" style="background:rgba(230,57,70,.1);border-color:var(--red);color:var(--red)">🔒</div>
+      <div class="rm-content">
+        <div class="rm-title">CompTIA Security+ (SY0-701)</div>
+        <div class="rm-sub">Passed · Guide live</div>
+        <div class="rm-tag" style="background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--green)">✓ Complete</div>
+      </div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-dot" style="background:rgba(56,189,248,.08);border-color:rgba(56,189,248,.25);color:var(--cyan)">🌐</div>
+      <div class="rm-content">
+        <div class="rm-title">Cisco CCNA (200-301)</div>
+        <div class="rm-sub">Currently studying — guide drops with the cert</div>
+        <div class="rm-tag" style="background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.25);color:var(--gold)">In Progress</div>
+      </div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-dot" style="background:rgba(255,255,255,.03);border-color:var(--border2);color:var(--muted)">🏗️</div>
+      <div class="rm-content">
+        <div class="rm-title">AWS Solutions Architect Associate (SAA-C03)</div>
+        <div class="rm-sub">After CCNA</div>
+        <div class="rm-tag" style="background:rgba(255,255,255,.03);border-color:var(--border);color:var(--muted)">Planned</div>
+      </div>
+    </div>
+    <div class="rm-item">
+      <div class="rm-dot" style="background:rgba(167,139,250,.06);border-color:rgba(167,139,250,.2);color:var(--purple)">🔍</div>
+      <div class="rm-content">
+        <div class="rm-title">CompTIA CySA+ (CS0-003)</div>
+        <div class="rm-sub">Analyst-level — currently preparing</div>
+        <div class="rm-tag" style="background:rgba(255,255,255,.03);border-color:var(--border);color:var(--muted)">Planned</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    Built by <strong>Vrishabh Bhavsar</strong> · Free forever · MIT License
+  </div>
+  <div class="footer-links">
+    <a href="https://vb-1405.github.io/Portfolio_VB/" target="_blank" class="footer-link">👤 Portfolio</a>
+    <a href="https://www.linkedin.com/in/cyberrookie/" target="_blank" class="footer-link">↗ LinkedIn</a>
+    <a href="https://github.com/VB-1405/cert-guides" target="_blank" class="footer-link">⭐ GitHub</a>
+    <a href="https://www.credly.com/badges/144c27ac-3106-4c8d-a9da-8aa5f3d3064a" target="_blank" class="footer-link">🏅 Credly</a>
+  </div>
+</footer>
+
+<script>
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Keyboard navigation for cert cards
+document.querySelectorAll('.cert-card[role="link"]').forEach(card => {
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter') card.click();
+  });
+});
+</script>
+</body>
+</html>
